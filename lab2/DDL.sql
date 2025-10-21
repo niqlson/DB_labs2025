@@ -174,15 +174,15 @@ VALUES (1, 1, 1, 1),
 
 INSERT INTO orders (id, user_id, phone_number, city, delivery_price, totalPrice, postal_code, comment, payment_type,
                     status, delivery_type, created_at, updated_at)
-VALUES (1, 1, '+79161234567', 'Москва', 5.00, 1304.99, '101000', 'Позвонить за час', 'CARD', 'CONFIRMED', 'COURIER',
+VALUES (1, 1, '+380631234567', 'Київ', 5.00, 1304.99, '01001', 'Подзвонити за годину', 'CARD', 'CONFIRMED', 'COURIER',
         CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-       (2, 2, '+79269876543', 'Санкт-Петербург', 3.00, 1002.99, '190000', 'Без комментариев', 'CASH', 'PENDING',
+       (2, 2, '+380667654321', 'Львів', 3.00, 1002.99, '79000', 'Без коментарів', 'CASH', 'PENDING',
         'PICKUP', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-       (3, 3, '+79031112233', 'Казань', 7.00, 1506.99, '420000', 'Код домофона 123', 'CARD', 'SHIPPED', 'POST',
+       (3, 3, '+380501112233', 'Одеса', 7.00, 1506.99, '65000', 'Код домофона 123', 'CARD', 'SHIPPED', 'POST',
         CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-       (4, 4, '+79554443322', 'Новосибирск', 6.00, 805.99, '630000', 'Доставить до 18:00', 'CASH', 'DELIVERED',
+       (4, 4, '+380934443322', 'Харків', 6.00, 805.99, '61000', 'Доставити до 18:00', 'CASH', 'DELIVERED',
         'COURIER', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-       (5, 5, '+79998887766', 'Екатеринбург', 4.00, 355.99, '620000', 'Оставить у двери', 'CARD', 'CANCELLED', 'PICKUP',
+       (5, 5, '+380998887766', 'Дніпро', 4.00, 355.99, '49000', 'Залишити біля дверей', 'CARD', 'CANCELLED', 'PICKUP',
         CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
 INSERT INTO order_items (id, product_id, order_id, quantity, price)
