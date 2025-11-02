@@ -119,7 +119,6 @@ CREATE TABLE reservation_items
 );
 
 
-
 INSERT INTO users (id, email, firstName, lastName, verified, blocked, role, password, updated_at, created_at)
 VALUES (1, 'ivan.petrenko@mail.ua', 'Іван', 'Петренко', true, false, 'USER', 'password123', CURRENT_TIMESTAMP,
         CURRENT_TIMESTAMP),
@@ -167,10 +166,10 @@ VALUES (1, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
 
 INSERT INTO cart_items (id, product_id, cart_id, quantity)
 VALUES (1, 1, 1, 1),
-       (2, 2, 1, 2),
-       (3, 3, 2, 1),
-       (4, 4, 3, 1),
-       (5, 5, 4, 3);
+       (2, 2, 2, 2),
+       (3, 3, 3, 1),
+       (4, 4, 4, 1),
+       (5, 5, 5, 3);
 
 INSERT INTO orders (id, user_id, phone_number, city, delivery_price, totalPrice, postal_code, comment, payment_type,
                     status, delivery_type, created_at, updated_at)
