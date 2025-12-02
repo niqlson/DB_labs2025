@@ -1,0 +1,174 @@
+@startuml
+set namespaceSeparator none
+left to right direction
+hide circle
+skinparam classAttributeIconSize 0
+skinparam classBackgroundColor #f9fafb
+skinparam classBorderColor #1f2937
+skinparam classArrowColor #4b5563
+
+class user_roles <<table>> {
+  +id : bigint <<PK>>
+  name : varchar
+  description : varchar
+}
+
+class users <<table>> {
+  +id : bigint <<PK>>
+  email : varchar <<UNIQUE>>
+  firstName : varchar
+  lastName : varchar
+  verified : boolean
+  blocked : boolean
+  role_id : bigint <<FK>>
+  password : varchar
+  updated_at : timestamp
+  created_at : timestamp
+}
+
+class payment_methods <<table>> {
+  +id : bigint <<PK>>
+  name : varchar
+  is_prepaid : boolean
+}
+
+class delivery_methods <<table>> {
+  +id : bigint <<PK>>
+  name : varchar
+  supports_cod : boolean
+}
+
+class order_statuses <<table>> {
+  +id : bigint <<PK>>
+  name : varchar
+  is_terminal : boolean
+}
+
+class reservation_statuses <<table>> {
+  +id : bigint <<PK>>
+  name : varchar
+  is_terminal : boolean
+}
+
+class carts <<table>> {
+  +id : bigint <<PK>>
+  user_id : bigint <<FK>>
+  created_at : timestamp
+  updated_at : timestamp
+}
+
+class cart_items <<table>> {
+  +cart_id : bigint <<PK,FK>>
+  +product_id : bigint <<PK,FK>>
+  quantity : int
+  added_at : timestamp
+}
+
+class products <<table>> {
+  +id : bigint <<PK>>
+  name : varchar
+  image_url : varchar
+  description : varchar
+  available_quantity : int
+  price : decimal(12,2)
+  enabled : boolean
+  updated_at : timestamp
+  created_at : timestamp
+}
+
+class discounts <<table>> {
+  +id : bigint <<PK>>
+  product_id : bigint <<FK>>
+  discount_value : decimal(5,2)
+  start_date : date
+  end_date : date
+  enabled : boolean
+  updated_at : timestamp
+  created_at : timestamp
+}
+
+class reviews <<table>> {
+  +product_id : bigint <<PK,FK>>
+  +user_id : bigint <<PK,FK>>
+  rating : int
+  text : varchar
+  created_at : timestamp
+}
+
+class postal_codes <<table>> {
+  +id : bigint <<PK>>
+  code : varchar <<UNIQUE>>
+  city : varchar
+  region : varchar
+}
+
+class orders <<table>> {
+  +id : bigint <<PK>>
+  user_id : bigint <<FK>>
+  payment_method_id : bigint <<FK>>
+  delivery_method_id : bigint <<FK>>
+  status_id : bigint <<FK>>
+  phone_number : varchar
+  comment : varchar
+  created_at : timestamp
+  updated_at : timestamp
+}
+
+class order_shipping <<table>> {
+  +order_id : bigint <<PK,FK>>
+  postal_code_id : bigint <<FK>>
+  address_line : varchar
+  delivery_fee : decimal(12,2)
+}
+
+class order_items <<table>> {
+  +order_id : bigint <<PK,FK>>
+  +product_id : bigint <<PK,FK>>
+  quantity : int
+  unit_price : decimal(12,2)
+}
+
+class order_totals <<view>> {
+  order_id : bigint
+  merchandise_total : decimal(12,2)
+  delivery_fee : decimal(12,2)
+  grand_total : decimal(12,2)
+}
+
+class reservations <<table>> {
+  +id : bigint <<PK>>
+  order_id : bigint <<FK>>
+  status_id : bigint <<FK>>
+  updated_at : timestamp
+  created_at : timestamp
+}
+
+class reservation_items <<table>> {
+  +reservation_id : bigint <<PK,FK>>
+  +product_id : bigint <<PK,FK>>
+  quantity : int
+}
+
+users }o--|| user_roles : role_id
+carts }o--|| users : user_id
+cart_items }o--|| carts : cart_id
+cart_items }o--|| products : product_id
+discounts }o--|| products : product_id
+reviews }o--|| products : product_id
+reviews }o--|| users : user_id
+orders }o--|| users : user_id
+orders }o--|| payment_methods : payment_method_id
+orders }o--|| delivery_methods : delivery_method_id
+orders }o--|| order_statuses : status_id
+order_shipping }o--|| orders : order_id
+order_shipping }o--|| postal_codes : postal_code_id
+postal_codes ||--o{ order_shipping : postal_code_id
+order_items }o--|| orders : order_id
+order_items }o--|| products : product_id
+order_totals }o--|| orders : order_id
+reservations }o--|| orders : order_id
+reservations }o--|| reservation_statuses : status_id
+reservation_items }o--|| reservations : reservation_id
+reservation_items }o--|| products : product_id
+
+@enduml
