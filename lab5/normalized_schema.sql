@@ -182,8 +182,6 @@ FROM order_items oi
 LEFT JOIN order_shipping os ON os.order_id = oi.order_id
 GROUP BY oi.order_id;
 
-SELECT order_id, total_amount FROM order_totals;
-
 CREATE TABLE reservation_statuses
 (
     id          BIGINT PRIMARY KEY,
@@ -287,3 +285,6 @@ INSERT INTO products (
 
 INSERT INTO order_items(order_id, product_id, quantity, unit_price)
 VALUES (1, 1, 2, 100.00);
+
+
+SELECT order_id, total_amount FROM order_totals;

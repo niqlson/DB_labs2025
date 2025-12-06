@@ -18,6 +18,8 @@
    - реальний ключ: `order_id, product_id → quantity, price`
    - дублювання пар продукт/замовлення + збереження похідної ціни.
 
+
+
 4. **reviews** (`lab2/DDL.sql`):
    - `id → product_id, user_id, rating, text`
    - предметний ключ: `product_id, user_id → rating, text`
